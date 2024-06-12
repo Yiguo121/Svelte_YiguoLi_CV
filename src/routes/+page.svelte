@@ -1,56 +1,58 @@
 <script>
   import './tailwind.css';
+  import { onMount } from 'svelte';
+  import AOS from 'aos';
+  import 'aos/dist/aos.css';
+
   import Education from './Education.svelte';
-  import WorkExperience from './WorkExperience.svelte';
+  import ProfessionalExperience from './ProfessionalExperience.svelte';
   import ExtracurricularActivities from './ExtracurricularActivities.svelte';
+  import DarkModeToggle from './DarkModeToggle.svelte';
+  import ContactForm from './ContactForm.svelte';
 
   let isDarkMode = false;
 
-  function toggleDarkMode() {
-    isDarkMode = !isDarkMode;
-    applyTheme();
-  }
-
-  function applyTheme() {
-    if (isDarkMode) {
-      document.body.style.backgroundColor = '#1a202c'; 
-      document.body.style.color = '#fff'; 
-    } else {
-      document.body.style.backgroundColor = '#fff'; 
-      document.body.style.color = '#000';
-    }
-  }
-
-  function handleLinkedInSignIn() {
-    window.location.href = 'https://www.linkedin.com/feed/?trk=guest_homepage-basic_nav-header-signin';
-  }
+  onMount(() => {
+    AOS.init({ duration: 1200 });
+  });
 </script>
 
-<div class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
-  <button class="p-2 rounded-md bg-gray-200 hover:bg-gray-300" on:click={toggleDarkMode}>
-    {isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-  </button>
+<style>
+  /* Add your custom styles here if needed */
+</style>
 
-  <div class="flex flex-col lg:flex-row">
-    <div class="lg:w-1/3 bg-blue-500 text-white p-4 space-y-4">
-      <h1 class="text-3xl font-bold">Yuan GAO</h1>
-      <p><i class="fas fa-phone mr-2"></i>+33-0757652830</p>
-      <p><i class="fas fa-envelope mr-2"></i>yuan.gao@essec.edu</p>
-      <p>LinkedIn: yuangao6688</p>
-      <p>Looking for an internship starting in January 2024 (6 months)</p>
-      <div class="mt-6">
-        <h2 class="text-xl font-bold border-b-2 border-white pb-2">Additional Information</h2>
-        <p>Language skills: Native in Chinese; fluent in English; intermediate in French (B2)</p>
-        <p>Computer skills: MS Office, Tableau, Python, Adobe Photoshop, CAD, Ableton Live</p>
+<div class={`bg-gray-100 dark:bg-gray-900 flex justify-center items-center min-h-screen`}>
+  <div class="bg-white dark:bg-gray-800 dark:text-gray-200 shadow-2xl rounded-lg w-11/12 max-w-6xl flex overflow-hidden my-10 relative">
+    <!-- Decorative background circles -->
+    <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-300 dark:bg-blue-600 rounded-full mix-blend-multiply filter blur-2xl opacity-50"></div>
+    <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-yellow-300 dark:bg-yellow-600 rounded-full mix-blend-multiply filter blur-2xl opacity-50"></div>
+
+    <div class="bg-gradient-to-b from-blue-500 to-blue-700 p-8 w-1/3 text-white flex flex-col items-center">
+      <div class="text-center mb-8">
+        <div class="text-4xl font-bold mb-4 border-b-4 border-white inline-block">Yiguo Li</div>
+        <div class="text-lg font-semibold mt-4">Contact Information</div>
+        <p class="mt-2">Email: <a href="mailto:B00802621@essec.edu" class="underline">B00802621@essec.edu</a></p>
+        <p class="mt-1">Phone: <a href="tel:+330757652807" class="underline">+33 07 57 65 28 07</a></p>
+      </div>
+      <div class="flex-grow">
+        <h2 class="text-2xl font-semibold bg-gradient-to-r from-green-400 to-blue-500 text-transparent bg-clip-text pb-2 mb-4">Skills & Hobbies</h2>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong>Languages:</strong> Chinese – Native, English – Fluent (IELTS 7.5; GMAT 720), French – Advanced</li>
+          <li><strong>IT Skills:</strong> Proficient in Microsoft Office (Excel, PowerPoint, Word), Adobe (Premiere, Photoshop)</li>
+          <li><strong>Hobbies:</strong> Keyboard for 10 years, Swimming for 15 years, Events & galas hosting (over 20 times)</li>
+        </ul>
       </div>
     </div>
-    <div class="lg:w-2/3 p-4 space-y-6">
-      <Education {isDarkMode} {applyTheme} />
-      <WorkExperience {isDarkMode} {applyTheme} />
-      <ExtracurricularActivities {isDarkMode} {applyTheme} />
-      <button class="fixed bottom-4 right-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" on:click={handleLinkedInSignIn}>
-        Share
-      </button>
+    <div class="p-8 w-2/3 text-gray-800 dark:text-gray-200">
+      <div class="mb-8 flex justify-between items-center">
+        <h2 class="text-3xl font-semibold bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text pb-2 mb-4">Objective</h2>
+        <DarkModeToggle {isDarkMode} />
+      </div>
+      <p class="text-lg leading-relaxed">Seeking a 6-month internship in marketing starting July 2023 with strong experience in data analysis and event holding.</p>
+      <Education />
+      <ProfessionalExperience />
+      <ExtracurricularActivities />
+      <ContactForm />
     </div>
   </div>
 </div>
